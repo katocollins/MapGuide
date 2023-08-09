@@ -17,5 +17,14 @@ background-color: burlywood;
 .Preview.active{
     left: 0;
 }
-     
+
+#searchInput {
+    width: calc(100% - 40px); 
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
     
