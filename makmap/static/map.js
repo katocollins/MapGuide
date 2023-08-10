@@ -108,7 +108,7 @@ document.getElementById('findButton').addEventListener('click', function () {
         }).addTo(map);
 
         // Zoom in to the searched building's location
-        map.setView([matchingBuilding.latitude, matchingBuilding.longitude], 18);
+        map.setView([matchingBuilding.latitude, matchingBuilding.longitude], 20);
     } else {
         console.error('No matching building found for the given name:', searchName);
         // Handle the case when no matching building is found (e.g., display an error message to the user)
