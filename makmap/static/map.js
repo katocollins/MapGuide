@@ -5,13 +5,15 @@ var preview = document.querySelector('.Preview')
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
-    maxZoom: 18,
+    maxZoom: 20,
 }).addTo(map);
 L.Control.geocoder().addTo(map);
 
 var buildingsData;
 var userLat;
 var userLng;
+var routeControl;
+var userLocationCircle;
 
 fetch('/api/hat/')
     .then(response => response.json())
@@ -34,7 +36,7 @@ function displayMarkers() {
 
             // Reset the icon of all markers to the default
             buildingsData.forEach(building => {
-                building.marker.setIcon(getMarkerIcon('blue')); // Set the default color
+                building.marker.setIcon(getMarkerIcon('purple')); // Set the default color
             });
 
             // Change the clicked marker's color to red
@@ -59,6 +61,14 @@ function showUserLocation(lat, lng) {
     // Create a marker for the user's current location
     var userMarker = L.marker([lat, lng], { icon: getMarkerIcon('green') }).addTo(map);
     userMarker.bindPopup('You are here').openPopup();
+
+     // Create a circle around the user's location
+     userLocationCircle = L.circle([lat, lng], {
+        color: 'green',     // Circle color
+        fillColor: 'blue', // Fill color
+        fillOpacity: 0.2,  // Fill opacity
+        radius: 50,        // Circle radius in meters
+    }).addTo(map);
 
     // Optionally, you can also center the map on the user's location
     map.setView([lat, lng], 16);
@@ -99,8 +109,12 @@ document.getElementById('findButton').addEventListener('click', function () {
 
     if (matchingBuilding) {
         // Draw a route between the user's current location and the searched building
+        if (routeControl) {
+            map.removeControl(routeControl);
+        }
+
         
-        L.Routing.control({
+        routeControl = L.Routing.control({
             waypoints: [
                 L.latLng(userLat, userLng), // Current location
                 L.latLng(matchingBuilding.latitude, matchingBuilding.longitude), // Searched building

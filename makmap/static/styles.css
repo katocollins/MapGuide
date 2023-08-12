@@ -1,21 +1,33 @@
 
-#map { height: 500px; }
+#map { 
+    height: 500px; 
+    border-radius: 2rem;
+}
         
 body{
-background-color: burlywood;
+background-color: rgb(228, 187, 138);
     }
-.Preview{
+
+#searchInput{
+    border-radius: 2rem;
+    height:20px;
+}     
+    
+#log{
+    border-radius: 32px;
+}
+.preview{
     display: block;
-    position: absolute;
-    left: -100%;
-    width: 500px;
-    height: 100px;
-    z-index:10;
-    overflow: scroll;
+    position: fixed;
+    top:0px;
+    bottom: 0px;
+    
+    width: 400px;
+    padding: 5px;
+    border: 2px;
+    z-index: 10;
+    height: 500px;
+    border-radius: 2rem;
+    padding: 5px;
     background-color: blue;
 }
-.Preview.active{
-    left: 0;
-}
-     
-    
