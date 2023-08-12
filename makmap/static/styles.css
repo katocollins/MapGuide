@@ -31,3 +31,11 @@ background-color: rgb(228, 187, 138);
     padding: 5px;
     background-color: blue;
 }
+
+.Preview.active{
+    left: 0;
+}
+
+
+
+    

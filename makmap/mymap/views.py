@@ -9,6 +9,7 @@ def map_view(request):
 
 def makView(request):
     buildings = BuildingsM.objects.all()
+    #fetch data from the database
 
     data = [
         {
@@ -19,6 +20,7 @@ def makView(request):
         }
         for building in buildings
     ]
+    #produce json response of the data and pushes it to an API end point
     return JsonResponse(data, safe=False)
     
  
